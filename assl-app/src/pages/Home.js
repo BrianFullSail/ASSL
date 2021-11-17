@@ -1,11 +1,19 @@
 import React from 'react'
 
 function Home(props) {
+    const query = new URLSearchParams(window.location.search)
+    fetch("http://localhost:3000/quizzes", {
+        headers: {
+            "Accept": "application/json",
+            "X-Access-Token": query.get('auth_token')
+        }
+    })
     return (
         <section style={styles.body}>
             <article style={styles.news}>
                 <div style={styles.newsArticle}>
                     <h2>Welcome to Quizzes for the masses!</h2>
+                    <a href="https://github.com/login/oauth/authorize?client_id=b65327d6f18a2484c20b">Login to GitHub</a>
                 </div>
             </article>
         </section>

@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from 'react'
-import { ReactDOM } from 'react'
+import { Link } from 'react-router-dom'
 
 function Quizzes() {
-    const [ quizData, setQuizData ] = useState(null)
+    const [ quizData, setQuizData ] = useState([])
     
     useEffect(() => {
+        const query = new URLSearchParams(window.location.search)
         async function getQuizzes(){
-            let response = await fetch("http://localhost:3000/quizzes", {
+            const response = await fetch("http://localhost:3000/quizzes", {
                 method: "GET",
-                headers: { "Accept": "application/json" }
+                headers: { 
+                    "Accept": "application/json",
+                    "X-Access-Token": query.get('auth_token')
+                }
             })
+            const data = await response.json()
+
+            console.log(data)
+
+            setQuizData(data)
             
-            if(response.redirected === true){
-                response = await fetch("http://localhost:3000/auth/login", {
-                method: "GET",
-                headers: { "Accept": "text/html" }})
-                console.log(response)
-            }
-            else{
-                console.log(response)
-            }
          }
          getQuizzes()
          
          
-    }, [quizData])
+    }, [])
+
+    // map through the quizzes and display each quiz
+    let quizzes = quizData.map((element,i) => {
+        return <Link to="../Quiz" key={element.id}>{element.name}<br/></Link>
+    })
     
     return (
         <section>
-            Not working!
-            {quizData && <p>{quizData}</p>}
-            {quizData && <p dangerouslySetInnerHTML={{__html: quizData}}></p>}
+            <h2>Available Quizzes</h2>
+            {quizzes}
         </section>
     )
 }
