@@ -16,8 +16,6 @@ function Quizzes() {
             })
             const data = await response.json()
 
-            console.log(data)
-
             setQuizData(data)
             
          }
@@ -28,14 +26,30 @@ function Quizzes() {
 
     // map through the quizzes and display each quiz
     let quizzes = quizData.map((element,i) => {
-        return <Link to="../Quiz" key={element.id}>{element.name}<br/></Link>
+        console.log(element)
+        return <p style={styles.btn}  key={element.id}><Link style={styles.links} to="../Quiz">{element.name}<br/></Link></p>
     })
     
     return (
         <section>
-            <h2>Available Quizzes</h2>
+            <h1>Available Quizzes</h1>
             {quizzes}
         </section>
     )
 }
 export default Quizzes;
+
+const styles = {
+    links: {
+        padding: "5px 10px",
+        border: "1px solid #006699",
+        backgroundColor: "#0097DF",
+        color: "white",
+        textDecoration: "none",
+        margin: "5rem",
+        borderRadius: ".25rem"
+    },
+    btn: {
+        margin: "2rem"
+    }
+}
