@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export default function Quiz(){
     // useLocation to pass the state from the Quizzes page to access the data passed
@@ -22,11 +22,17 @@ export default function Quiz(){
             {choices}
         </article>
     })
+    // using useNavigate to be able to redirect to Quizzes on form submission 
+    const navigate = useNavigate()
+
+    const handleSubmit = () => {
+        navigate("/Quizzes")
+    }
 
     return(
         <section style={styles.main}>
             <h1>{id.name}</h1>
-            <form style={styles.form} action="/Quizzes" name="myForm">
+            <form style={styles.form} onSubmit={handleSubmit} name="myForm">
                 <section style={styles.sections}>{questions}</section>
                 <input type="submit" style={{margin: "5rem"}}/>
             </form>
