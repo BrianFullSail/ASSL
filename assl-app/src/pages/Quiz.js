@@ -1,19 +1,19 @@
 import React from 'react'
-import { useLocation, Navigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 function Quiz(){
     const location = useLocation()
     const id = location.state.data
     const question = id.Questions
 
-    let questions = question.map((element) => {
-        let choices = element.Choices.map((element) => {
-            
-            return <article key={element.choice} style={styles.article}><input type="radio" name="choice" value={element.choice}></input>
+    let questions = question.map((q) => {
+        let choices = q.Choices.map((element) => {
+            let choiceName = element.questionId
+            return <article key={element.choice} style={styles.article}><input type="radio" name={choiceName} value={element.choice}></input>
             <label>{element.choice}</label></article>
         })
-        return <article key={element.question}>
-            <h2>{element.question}</h2>
+        return <article key={q.question}>
+            <h2>{q.question}</h2>
             {choices}
         </article>
     })
