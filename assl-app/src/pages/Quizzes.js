@@ -7,12 +7,13 @@ function Quizzes() {
     useEffect(() => {
         const query = new URLSearchParams(window.location.search)
         async function getQuizzes(){
+            const headers = {"Accept": "application/json"}
+            if (query.get('auth_token')) {
+                headers["X-Access-Token"] = query.get('auth_token')
+            }
             const response = await fetch("http://localhost:3000/quizzes", {
                 method: "GET",
-                headers: { 
-                    "Accept": "application/json",
-                    "X-Access-Token": query.get('auth_token')
-                }
+                headers
             })
             const data = await response.json()
 
