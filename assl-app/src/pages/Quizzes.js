@@ -24,10 +24,11 @@ function Quizzes() {
          
     }, [])
 
+
     // map through the quizzes and display each quiz
     let quizzes = quizData.map((element,i) => {
         console.log(element)
-        return <p style={styles.btn}  key={element.id}><Link style={styles.links} to="../Quiz">{element.name}<br/></Link></p>
+        return <p style={styles.btn}  key={element.id}><Link style={styles.links} to="../Quiz" state={{data: element.id}}>{element.name}<br/></Link></p>
     })
     
     return (

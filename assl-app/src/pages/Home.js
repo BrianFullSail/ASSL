@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Home(props) {
+function Home() {
     const query = new URLSearchParams(window.location.search)
     fetch("http://localhost:3000/quizzes", {
         headers: {
