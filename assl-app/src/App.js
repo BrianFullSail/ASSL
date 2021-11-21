@@ -8,7 +8,7 @@ import Routes from './components/Routes'
 function App() {
   const [loggedIn, setLogin] = useState(false)
   const query = new URLSearchParams(window.location.search)
-
+  // if logged auth_token exists show setState to true in order to show the Nav
   useEffect(() => {
     if (query.get('auth_token')) {
     setLogin(true)
@@ -25,7 +25,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <Nav /> */}
         {showNav()}
         <main>
           <Routes />

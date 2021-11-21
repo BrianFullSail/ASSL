@@ -34,7 +34,7 @@ export default function Quiz(){
             <h1>{id.name}</h1>
             <form style={styles.form} onSubmit={handleSubmit} name="myForm">
                 <section style={styles.sections}>{questions}</section>
-                <input type="submit" style={{margin: "5rem"}}/>
+                <input type="submit" style={styles.btn}/>
             </form>
         </section>
     )
@@ -61,5 +61,13 @@ const styles = {
         display: "flex",
         alignContent: "start",
         marginLeft: "25%"
+    },
+    btn: {
+        margin: "5rem",
+        width: "10%",
+        height: "30px",
+        backgroundColor: "#0097DF",
+        color: "#FFF",
+        borderRadius: ".25rem"
     }
 }
